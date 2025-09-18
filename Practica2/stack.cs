@@ -18,10 +18,11 @@ public class Stack<T>
 
     public bool isvacio => top == -1; // true si la pila está vacía
 
-    public void Push(T item)// agrega un elemento en la cima
+    public void Push(T item)
     {
         if (top + 1 == items.Length)
-            Resize(items.Length * 2); // duplicar tamaño si es necesario como en la lista, el Rezize es un metodo privado el cual  hace una copia del array y lo duplica
+            Resize(items.Length * 2);
+        items[++top] = item;
     }
 
     public T Pop() // quita y devuelve el elemento superior

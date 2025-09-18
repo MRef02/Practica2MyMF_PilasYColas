@@ -13,10 +13,11 @@ public interface IProducto
 
 public class Productos : IProducto
 {
-    public string Nombre { get; private set; }
+    public string Nombre { get;  set; }
     public int ID { get; private set; }
-    public int Precio { get; private set; }
+    public int Precio { get;  set; }
     public int Cantidad { get; set; }
+    
 
     public Productos(string nombre, int id, int precio, int cantidad)
     {

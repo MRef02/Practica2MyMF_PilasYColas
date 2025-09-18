@@ -23,9 +23,9 @@ public class ListaProductos<T> where T : IProducto
         cantidadActual++;
     }
     public int Count
-{
-    get { return cantidadActual; }
-}
+    {
+        get { return cantidadActual; }
+    }
 
 
     private void Redimensionar()
@@ -74,7 +74,7 @@ public class ListaProductos<T> where T : IProducto
         }
         throw new ArgumentException("Producto con el ID especificado no encontrado.");
     }
-      public void EliminarTodos()
+    public void EliminarTodos()
     {
         for (int i = 0; i < cantidadActual; i++)
             productos[i] = default(T);
@@ -164,4 +164,11 @@ public class ListaProductos<T> where T : IProducto
             return default(T);
         }
     }
+    public T BuscarPorId(int id)
+{
+    for (int i = 0; i < Count; i++)
+        if (this[i] != null && this[i].ID == id)
+            return this[i];
+    return default(T);
+}
 }

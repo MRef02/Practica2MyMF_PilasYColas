@@ -1,32 +1,23 @@
 public class Pedido
 {
-    public int ProductId { get; set; }
+    public int ProductoId { get; set; }
     public int Cantidad { get; set; }
-
-    public Pedido(int productId, int cantidad)
+    public Pedido() { }
+    public Pedido(int productoId, int cantidad)
     {
-        ProductId = productId;
+        ProductoId = productoId;
         Cantidad = cantidad;
     }
-
-    public override string ToString()
-    {
-        return $"ProductoID: {ProductId}, Cantidad: {Cantidad}";
-    }
 }
+
 public class Lote
 {
-    public int ProductId { get; set; }
-    public int Unidades { get; set; }
-
-    public Lote(int productId, int unidades)
+    public int ProductoId { get; set; }
+    public int Cantidad { get; set; }
+    public Lote() { }
+    public Lote(int productoId, int cantidad)
     {
-        ProductId = productId;
-        Unidades = unidades;
-    }
-
-    public override string ToString()
-    {
-        return $"ProductoID: {ProductId}, Unidades: {Unidades}";
+        ProductoId = productoId;
+        Cantidad = cantidad;
     }
 }
