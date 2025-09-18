@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
+
 class Program
+
 {
+    static readonly string DATA_DIR  =
+    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MiInventario");
+    static readonly string FILE_PATH = Path.Combine(DATA_DIR, "Producto.json");
+
     static ListaProductos<Productos> inventario = new ListaProductos<Productos>(10);
     static Queue<Pedido> pedidos = new Queue<Pedido>();
     static Stack<Lote> lotes = new Stack<Lote>();
 
-    static readonly string FILE_PATH = Path.Combine(AppContext.BaseDirectory, "Producto.json");
+    
 
     static void Main(string[] args)
     {
@@ -201,8 +207,12 @@ class Program
 
     // ---------------- PERSISTENCIA ----------------
 
-    static void GuardarDatos()
+  static void GuardarDatos()
+{
+    try
     {
+        Directory.CreateDirectory(DATA_DIR);
+
         var lista = new List<Productos>();
         for (int i = 0; i < inventario.Count; i++)
         {
@@ -210,11 +220,19 @@ class Program
             if (prod != null) lista.Add(prod);
         }
 
-        File.WriteAllText(FILE_PATH, JsonSerializer.Serialize(lista, new JsonSerializerOptions { WriteIndented = true }));
+        var json = JsonSerializer.Serialize(lista, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText(FILE_PATH, json);
         Console.WriteLine($"✅ Datos guardados en: {FILE_PATH}");
     }
+    catch (Exception ex)
+    {
+        Console.WriteLine("❌ Error al guardar: " + ex.Message);
+    }
+}
 
-    static void CargarDatos()
+static void CargarDatos()
+{
+    try
     {
         if (File.Exists(FILE_PATH))
         {
@@ -224,12 +242,17 @@ class Program
             {
                 inventario.EliminarTodos();
                 foreach (var prod in productos) inventario.AddProducto(prod);
-                Console.WriteLine($" Inventario cargado desde {FILE_PATH} ({productos.Count} productos)");
+                Console.WriteLine($"📂 Inventario cargado: {productos.Count} producto(s) desde {FILE_PATH}");
             }
         }
         else
         {
-            Console.WriteLine("No se encontró archivo previo, inventario vacío.");
+            Console.WriteLine($"ℹ️ No existe aún {FILE_PATH}. Empezamos con inventario vacío.");
         }
     }
+    catch (Exception ex)
+    {
+        Console.WriteLine("❌ Error al cargar: " + ex.Message);
+    }
+}
 }

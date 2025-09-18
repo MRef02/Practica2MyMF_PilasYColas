@@ -3,12 +3,18 @@
     "Nombre": "coca",
     "ID": 12345,
     "Precio": 14,
-    "Cantidad": 11
+    "Cantidad": 33
   },
   {
     "Nombre": "rambutan",
     "ID": 32145,
     "Precio": 566,
     "Cantidad": 12
+  },
+  {
+    "Nombre": "rr",
+    "ID": 22345,
+    "Precio": 6,
+    "Cantidad": 7
   }
 ]
