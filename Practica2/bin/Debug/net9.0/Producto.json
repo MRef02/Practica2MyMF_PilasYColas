@@ -1,0 +1,14 @@
+[
+  {
+    "Nombre": "coca",
+    "ID": 12345,
+    "Precio": 14,
+    "Cantidad": 55
+  },
+  {
+    "Nombre": "rambutan",
+    "ID": 32145,
+    "Precio": 566,
+    "Cantidad": 30
+  }
+]

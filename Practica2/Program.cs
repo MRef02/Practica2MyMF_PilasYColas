@@ -222,48 +222,28 @@ class Program
 
     static void GuardarDatos()
     {
-        var snapshot = new InventarioSnapshot
-        {
-            ListaProductos = new List<Productos>(),
-            PedidosEnFifo = new List<Pedido>(),
-            LotesDesdeFondo = new List<Lote>()
-        };
-
+        var lista = new List<Productos>();
         for (int i = 0; i < inventario.Count; i++)
         {
             var prod = inventario[i];
             if (prod != null)
-                snapshot.ListaProductos.Add(prod);
+                lista.Add(prod);
         }
-        foreach (var pedido in pedidos)
-            snapshot.PedidosEnFifo.Add(pedido);
-        foreach (var lote in lotes.EnumeraFromTopo())
-            snapshot.LotesDesdeFondo.Add(lote);
-
-        File.WriteAllText(ARCHIVO, JsonSerializer.Serialize(snapshot, new JsonSerializerOptions { WriteIndented = true }));
+        File.WriteAllText("Producto.json", JsonSerializer.Serialize(lista, new JsonSerializerOptions { WriteIndented = true }));
     }
 
     static void CargarDatos()
     {
-        if (!File.Exists(ARCHIVO))
-            return;
-
-        var json = File.ReadAllText(ARCHIVO);
-        var snapshot = JsonSerializer.Deserialize<InventarioSnapshot>(json);
-
-        if (snapshot != null)
+        if (File.Exists("Producto.json"))
         {
-            inventario.EliminarTodos();
-            foreach (var prod in snapshot.ListaProductos)
-                inventario.AddProducto(prod);
-
-            pedidos = new Queue<Pedido>(20);
-            foreach (var pedido in snapshot.PedidosEnFifo)
-                pedidos.Enqueue(pedido);
-
-            lotes = new Stack<Lote>(20);
-            foreach (var lote in snapshot.LotesDesdeFondo)
-                lotes.Push(lote);
+            var json = File.ReadAllText("Producto.json");
+            var productos = JsonSerializer.Deserialize<List<Productos>>(json);
+            if (productos != null)
+            {
+                inventario.EliminarTodos();
+                foreach (var prod in productos)
+                    inventario.AddProducto(prod);
+            }
         }
     }
 }

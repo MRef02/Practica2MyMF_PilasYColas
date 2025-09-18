@@ -12,3 +12,4 @@ C:\Users\canlo\OneDrive - Escuela Modelo SCP\DTS\semestre 3\Practica2_PilasYCola
 C:\Users\canlo\OneDrive - Escuela Modelo SCP\DTS\semestre 3\Practica2_PilasYColas\Practica2\obj\Debug\net9.0\Practica2.pdb
 C:\Users\canlo\OneDrive - Escuela Modelo SCP\DTS\semestre 3\Practica2_PilasYColas\Practica2\obj\Debug\net9.0\Practica2.genruntimeconfig.cache
 C:\Users\canlo\OneDrive - Escuela Modelo SCP\DTS\semestre 3\Practica2_PilasYColas\Practica2\obj\Debug\net9.0\ref\Practica2.dll
+c:\Users\canlo\OneDrive - Escuela Modelo SCP\DTS\semestre 3\Practica2_PilasYColas\Practica2\obj\Debug\net9.0\Practica2.sourcelink.json
