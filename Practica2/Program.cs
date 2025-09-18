@@ -70,6 +70,7 @@ class Program
         Pedido pedido = new Pedido { ProductoId = id, Cantidad = cantidad };
         pedidos.Enqueue(pedido);
         Console.WriteLine("Pedido registrado.");
+        GuardarDatos(); // <--- NUEVO: persistir después de cambios
     }
 
     static void ProcesarPedido()
@@ -106,7 +107,9 @@ class Program
         Lote lote = new Lote { ProductoId = id, Cantidad = cantidad };
         lotes.Push(lote);
         Console.WriteLine("Lote recibido y almacenado en la pila.");
+        GuardarDatos(); // <--- NUEVO: persistir después de cambios
     }
+
 
     static void ReabastecerInventario()
     {
@@ -211,18 +214,36 @@ class Program
 {
     try
     {
+<<<<<<< HEAD
         Directory.CreateDirectory(DATA_DIR);
 
         var lista = new List<Productos>();
         for (int i = 0; i < inventario.Count; i++)
+=======
+        try
+>>>>>>> 2a8323e4f079fc8401c35e7f0f252d03266c8d45
         {
-            var prod = inventario[i];
-            if (prod != null) lista.Add(prod);
+            var lista = new List<Productos>();
+            for (int i = 0; i < inventario.Count; i++)
+            {
+                var prod = inventario[i];
+                if (prod != null) lista.Add(prod);
+            }
+            File.WriteAllText(FILE_PATH,
+                JsonSerializer.Serialize(lista, new JsonSerializerOptions { WriteIndented = true }));
+            Console.WriteLine($"✅ Datos guardados en: {FILE_PATH}");
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine("❌ Error al guardar: " + ex.Message);
+        }
+<<<<<<< HEAD
 
         var json = JsonSerializer.Serialize(lista, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(FILE_PATH, json);
         Console.WriteLine($"✅ Datos guardados en: {FILE_PATH}");
+=======
+>>>>>>> 2a8323e4f079fc8401c35e7f0f252d03266c8d45
     }
     catch (Exception ex)
     {
@@ -230,9 +251,14 @@ class Program
     }
 }
 
+<<<<<<< HEAD
 static void CargarDatos()
 {
     try
+=======
+
+    static void CargarDatos()
+>>>>>>> 2a8323e4f079fc8401c35e7f0f252d03266c8d45
     {
         if (File.Exists(FILE_PATH))
         {
